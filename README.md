@@ -1,2 +1,2 @@
 # seller-backend
-Backend for Seller Appl
+This backend will hold all endpoints
