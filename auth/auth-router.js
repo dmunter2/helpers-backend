@@ -1,9 +1,8 @@
 const router = require('express').Router();
 const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
-const secret = require('../config/secret');
 const Userdb = require('../users/users-model');
-
+const secret = require('../config/secret');
+const jwt = require('jsonwebtoken');
 
 router.get('/', (req,res) => {
     Userdb.find()
@@ -15,7 +14,7 @@ router.get('/', (req,res) => {
 router.post('/register', (req,res) => {
     
     if(!req.body.username || !req.body.password){
-        res.status(500).json({message: "Please Enter a Username and Passowrd"})
+        res.status(500).json({message: "Please Enter a Username and Password"})
     } else if(req.body.username && req.body.password){
         const user = req.body
         const hash = bcrypt.hashSync(user.password, 10)
@@ -39,13 +38,13 @@ router.post('/login', (req,res) => {
     .first()
     .then(user => {
         if(user && bcrypt.compareSync(password, user.password)) {
-            // const token = genToken(user)
-            //     res.status(200).json({
-            //         user_id: `${user.id}`,
-            //         token: token,
-            //         message: `Welcome to Helperz.com ${user.username}` 
-            //     })
-            res.send('its wokring')
+            const token = genToken(user)
+                res.status(200).json({
+                    user_id: `${user.id}`,
+                    token: token,
+                    message: `Welcome to Helperz.com ${user.username}` 
+                })
+                // res.status(200).json({message: "working"})
         } else{
             res.status(500).json({error: 'Invalid Credentials'})
         }
@@ -58,22 +57,17 @@ router.post('/login', (req,res) => {
 
 
 
+function genToken(user){
 
+    const payload = {
+        userid: user.id,
+        username: user.username
+    }
+    const options = {expiresIn: "1h"}
+    const token = jwt.sign(payload, secret.jwtSecret, options)
 
-
-
-module.exports = router;
-
-
-
-
-
-
-
-
-
-
-
+    return token;
+};
 
 
 
