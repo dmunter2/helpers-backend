@@ -5,7 +5,12 @@ const secret = require('../config/secret');
 const Userdb = require('../users/users-model');
 
 
-
+router.get('/', (req,res) => {
+    Userdb.find()
+    .then(user =>{
+        res.status(200).json(user)
+    })
+})
 
 router.post('/register', (req,res) => {
     
@@ -28,10 +33,27 @@ router.post('/register', (req,res) => {
 
 
 
-// router.post('/login', (req,res) => {
-//     const {username, password} = req.body
-
-// })
+router.post('/login', (req,res) => {
+    let {username, password} = req.body;
+    Userdb.findBy({username})
+    .first()
+    .then(user => {
+        if(user && bcrypt.compareSync(password, user.password)) {
+            // const token = genToken(user)
+            //     res.status(200).json({
+            //         user_id: `${user.id}`,
+            //         token: token,
+            //         message: `Welcome to Helperz.com ${user.username}` 
+            //     })
+            res.send('its wokring')
+        } else{
+            res.status(500).json({error: 'Invalid Credentials'})
+        }
+    })
+    .catch(err => {
+        res.status(500).json({error: "Username not found"})
+    })
+})
 
 
 
