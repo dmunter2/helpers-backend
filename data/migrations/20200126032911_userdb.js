@@ -13,7 +13,7 @@ exports.up = function(knex) {
             .notNullable()
     })
         .createTable('posts', table => {
-        table.increments('id')
+        table.integer('id')
 
         table
             .string('title', 128)
@@ -51,20 +51,20 @@ exports.up = function(knex) {
             .references('posts.id')
     })
 
-    .createTable('likes', table => {
-        table
-            .string('post_id')
-            .notNullable()
-            .references('posts.id')
+    // .createTable('likes', table => {
+    //     table
+    //         .integer('likes_post_id_foreign')
+    //         .notNullable()
+    //         .references('posts.id')
         
-        table
-            .boolean('is_liked')
+    //     table
+    //         .boolean('is_liked')
         
-        table
-            .integer('user_id')
-            .notNullable()
-            .references('users.id')
-    })
+    //     table
+    //         .integer('user_id')
+    //         .notNullable()
+    //         .references('users.id')
+    // })
 
   
 };
