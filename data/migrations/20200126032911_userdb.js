@@ -1,7 +1,7 @@
 
 exports.up = function(knex) {
     return knex.schema.createTable('users', table => {
-        table.increments('id')
+        table.increments('id').unique()
 
         table    
             .string('username', 128)
@@ -13,7 +13,7 @@ exports.up = function(knex) {
             .notNullable()
     })
         .createTable('posts', table => {
-        table.integer('id')
+        table.increments('id').unique()
 
         table
             .string('title', 128)
@@ -27,20 +27,22 @@ exports.up = function(knex) {
 
 
         table
-            .integer('users_id').notNullable().unsigned().references('users.id')
+            .integer('user_id').notNullable().unsigned().references('id').inTable('users')
     })
     .createTable('darkmode', table => {
+
         table
-            .integer('users_id')
+            .integer('user_id')
             .notNullable()
             .unsigned()
-            .references('users.id')
+            .references('id')
+            .inTable('users')
         
         table
             .boolean('is_dark')
     })
     .createTable('comments', table => {
-        table.increments('id')
+        table.increments('id').unique()
 
         table
             .string('description')
@@ -48,28 +50,31 @@ exports.up = function(knex) {
         table
             .integer('post_id')
             .notNullable()
-            .references('posts.id')
+            .references('id')
+            .inTable('posts')
     })
 
-    // .createTable('likes', table => {
-    //     table
-    //         .integer('likes_post_id_foreign')
-    //         .notNullable()
-    //         .references('posts.id')
+    .createTable('likes', table => {
+        table
+            .integer('post_id')
+            .notNullable()
+            .references('id')
+            .inTable('posts')
         
-    //     table
-    //         .boolean('is_liked')
+        table
+            .boolean('is_liked')
         
-    //     table
-    //         .integer('user_id')
-    //         .notNullable()
-    //         .references('users.id')
-    // })
+        table
+            .integer('user_id')
+            .notNullable()
+            .references('id')
+            .inTable('users')
+    })
 
   
 };
 
 exports.down = function(knex) {
-    return knex.schema.dropTableIfExists('users').dropTableIfExists('darkmode').dropTableIfExists('likes').dropTableIfExists('comments').dropTableIfExists('posts')
+    return knex.schema.dropTableIfExists('users').dropTableIfExists('darkmode').dropTableIfExists('comments').dropTableIfExists('posts').dropTableIfExists('likes')
   
 };
