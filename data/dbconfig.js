@@ -1,4 +1,8 @@
-const express = require('express')
+const knex = require('knex')
 
-const knex = require('../knexfile')
+const knexconfig = require('../knexfile')
+
+const environment = process.env.DB_ENV || development
+
+
 
