@@ -8,7 +8,7 @@ server.get('/', (req,res) => {
     res.send('Welcome to the Helpers Backend')
 })
 
-server.use('/login', )
+// server.use('/login', )
 
 
 module.exports = server;
