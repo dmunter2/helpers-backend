@@ -2,6 +2,10 @@
   "name": "seller-backend",
   "version": "1.0.0",
   "main": "index.js",
+  "scripts": {
+    "server": "nodemon",
+    "start": "node index.js"
+  },
   "repository": "https://github.com/dmunter2/seller-backend.git",
   "author": "dmunter2 <49967133+dmunter2@users.noreply.github.com>",
   "license": "MIT",
@@ -11,6 +15,7 @@
     "express": "^4.17.1",
     "express-sessions": "^1.0.6",
     "knex": "^0.20.8",
+    "node": "^13.6.0",
     "nodemon": "^2.0.2",
     "pg": "^7.17.1",
     "sqlite3": "^4.1.1"

@@ -1,66 +1,66 @@
 
 exports.up = function(knex) {
-    return knex.schema.createTable('users', users => {
-        users.increments('id')
+    return knex.schema.createTable('users', table => {
+        table.increments('id')
 
-        users    
+        table    
             .string('username', 128)
             .unique()
             .notNullable()
         
-        users
+        table
             .string('password', 128)
             .notNullable()
     })
-    .createTable('posts', posts => {
-        posts.increments('id')
+        .createTable('posts', table => {
+        table.increments('id')
 
-        posts
+        table
             .string('title', 128)
             .notNullable()
 
-        posts
+        table
             .string('postdescript')
         
-        posts
+        table
             .date('date')
 
 
-        posts
+        table
             .integer('users_id').notNullable().unsigned().references('users.id')
     })
-    .createTable('darkmode', darkmode => {
-        darkmode
+    .createTable('darkmode', table => {
+        table
             .integer('users_id')
             .notNullable()
             .unsigned()
             .references('users.id')
         
-        darkmode
-            .boolean('mode')
+        table
+            .boolean('is_dark')
     })
-    .createTable('comments', comments => {
-        comments.increments('id')
+    .createTable('comments', table => {
+        table.increments('id')
 
-        comments
+        table
             .string('description')
         
-        comments
+        table
             .integer('post_id')
             .notNullable()
             .references('posts.id')
     })
 
-    .createTable('likes', likes => {
-        likes
+    .createTable('likes', table => {
+        table
             .string('post_id')
             .notNullable()
             .references('posts.id')
         
-        likes
-            .boolean('liked')
+        table
+            .boolean('is_liked')
         
-        likes
+        table
             .integer('user_id')
             .notNullable()
             .references('users.id')
