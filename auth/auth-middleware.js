@@ -6,7 +6,6 @@ const secret = require('../config/secret')
 module.exports = (req,res,next) => {
 
     const token = req.headers.authorization
-    // console.log(req.headers)
 
 
     if(token) {

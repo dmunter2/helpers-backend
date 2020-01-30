@@ -20,11 +20,11 @@ async function add(post) {
 }
 
 function find() {
-    return db('users').select()
+    return db('posts').select()
 }
 
 function findBy(filter) {
-    return db('users').where(filter)
+    return db('posts').where(filter)
 }
 
 
@@ -36,7 +36,7 @@ function findById(id) {
 }
 
 function insert(user) {
-    return db('users')
+    return db('posts')
         .insert(user)
         .then(ids => {
             return getById(ids[0]);
@@ -44,7 +44,7 @@ function insert(user) {
 }
 
 function remove(id) {
-    return db('users')
+    return db('posts')
         .where('id', id)
         .del();
 }
