@@ -25,7 +25,6 @@ exports.up = function(knex) {
         table
             .date('date')
 
-
         table
             .integer('user_id').notNullable().unsigned().references('id').inTable('users')
     })

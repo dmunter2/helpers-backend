@@ -14,13 +14,16 @@ module.exports = {
 
 
 
-async function add(post) {
-    const [id] = await db('posts').insert(post)
-    return findById(id)
+function add(user) {
+    return db('posts').returning('id').insert(user)
+        .then(ids => {
+            const [id] = ids;
+            return findById(id);
+        });
 }
 
 function find() {
-    return db('posts').select()
+    return db('posts')
 }
 
 function findBy(filter) {
