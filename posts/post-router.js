@@ -20,8 +20,9 @@ router.get('/', (req,res) => {
 
 
 router.post('/new', restricted, (req,res) => {
-    const body = req.body
-    const item = {...body, user_id: req.decodedJwt.userid, date: Date()}
+    const today = new Date();
+    const body = req.body;
+    const item = {...body, user_id: req.decodedJwt.userid, date: today}
     Postdb.add(item)
         .then(() => {
             res.status(200).json({message: `The post of '${body.title}' has been added`})
