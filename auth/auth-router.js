@@ -24,9 +24,6 @@ router.post('/register', (req,res) => {
             .then(user => {
                 res.status(200).json({message: `${user.username} has been added to the system`})
             })
-            .catch(err => {
-                res.status(500).json({error: 'User has not been added'})
-            })
     }
 })
 
