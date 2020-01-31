@@ -26,6 +26,9 @@ router.post('/new', restricted, (req,res) => {
         .then(() => {
             res.status(200).json({message: `The post of '${body.title}' has been added`})
         })
+        .catch(err => {
+            res.status(500).json(err)
+        })
 })
 
 
