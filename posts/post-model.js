@@ -46,8 +46,13 @@ function insert(user) {
         });
 }
 
-function remove(id) {
+function remove(title, id) {
     return db('posts')
-        .where('id', id)
-        .del();
+        .where('title', title)
+        .del()
+        .then(() => { return findBy(id) })
+
 }
+
+
+
