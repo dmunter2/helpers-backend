@@ -41,6 +41,7 @@ router.post('/login', (req,res) => {
             const token = genToken(user)
                 res.status(200).json({
                     user_id: `${user.id}`,
+                    username: `${user.username}`,
                     token: token,
                     message: `Welcome to Helperz.com ${user.username}` 
                 })
