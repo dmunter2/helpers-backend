@@ -1,8 +1,10 @@
 const express = require('express');
 const authlogin = require('../auth/auth-router')
 const post = require('../posts/post-router')
-
+const cors = require('cors')
 const server = express()
+
+server.use(cors())
 
 server.use(express.json())
 
