@@ -46,9 +46,9 @@ function insert(user) {
         });
 }
 
-function remove(title, id) {
+function remove(postId, id) {
     return db('posts')
-        .where('title', title)
+        .where('id', postId)
         .del()
         .then(() => { return findBy(id) })
 

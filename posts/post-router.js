@@ -35,20 +35,15 @@ router.post('/new', restricted, (req,res) => {
 router.delete('/delete', restricted, (req,res) => {
 
     const id = req.decodedJwt.userid
-    const title = req.body.title
-    Postdb.findById(id)
-     .then(() => {
-         Postdb.remove(title, id)
-          .then(post => {
-              res.status(200).json({ message: `post ${post} has been deleted`})
-          })
-          .catch(err => {
-              res.status(500).json(err)
-          })
-     })
-     .catch(err => {
-         res.status(500).json(err)
-     })
+    const postId = req.body.id
+
+    Postdb.remove(postId, id)
+        .then(post => {
+            res.status(200).json(post)
+        })
+        .catch(err => {
+            res.status(500).json(err)
+        })
 })
 
 
