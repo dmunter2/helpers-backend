@@ -32,10 +32,9 @@ function findBy(filter) {
 
 
 
-function findById(id) {
+function findById(user_id) {
     return db('posts')
-        .where({ id })
-        .first()
+        .where({ user_id })
 }
 
 function insert(user) {
@@ -46,9 +45,9 @@ function insert(user) {
         });
 }
 
-function remove(title, id) {
+function remove(postId, id) {
     return db('posts')
-        .where('title', title)
+        .where('id', postId)
         .del()
         .then(() => { return findBy(id) })
 
