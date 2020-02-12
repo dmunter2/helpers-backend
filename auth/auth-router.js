@@ -9,6 +9,9 @@ router.get('/', restricted, (req,res) => {
     .then(user =>{
         res.status(200).json(user)
     })
+    .catch(err => {
+        res.status(500).json({ message: "this error is coming from getting  /" })
+    })
 })
 
 router.post('/register', (req,res) => {
@@ -25,7 +28,7 @@ router.post('/register', (req,res) => {
                 res.status(200).json({message: `${user.username} has been added to the system`})
             })
             .catch(err => {
-                res.status(200).json(err)
+                res.status(200).json({ message: "this error is coming from registering a new account" })
             })
     }
 })

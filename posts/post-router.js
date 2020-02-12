@@ -14,7 +14,7 @@ router.get('/', (req,res) => {
             res.status(200).json(post)
         })
         .catch(err => {
-            res.status(500).json(err)
+            res.status(500).json({ message: "this error is coming from the getting new req" })
         })
 })
 
@@ -27,7 +27,7 @@ router.get('/me', restricted, (req, res) => {
             res.status(200).json(post)
         })
         .catch(err => {
-            res.status(500).json(err)
+            res.status(500).json({ message: "this error is coming from the posting me" })
         })
 })
 
@@ -41,7 +41,7 @@ router.post('/new', restricted, (req,res) => {
             res.status(200).json({message: `The post of '${body.title}' has been added`})
         })
         .catch(err => {
-            res.status(500).json(err)
+            res.status(500).json({message: "this error is coming from the posting new section"})
         })
 })
 
