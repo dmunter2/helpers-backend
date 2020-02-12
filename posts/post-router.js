@@ -55,7 +55,7 @@ router.delete('/delete', restricted, (req,res) => {
             res.status(200).json(post)
         })
         .catch(err => {
-            res.status(500).json(err)
+            res.status(500).json({message: "the catch error is happening after the delete call"})
         })
 })
 
