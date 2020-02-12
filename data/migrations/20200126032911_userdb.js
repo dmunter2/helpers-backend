@@ -27,7 +27,10 @@ exports.up = function(knex) {
 
         table
             .integer('user_id').notNullable().unsigned().references('id').inTable('users')
-    })
+
+        table
+            .string('username').notNullable().unsigned().references('username').inTable('users')
+        })
     .createTable('darkmode', table => {
 
         table
