@@ -49,9 +49,10 @@ function remove(postId, id) {
     return db('posts')
         .where('id', postId)
         .del()
-        .then(() => { return findBy(id) })
+        .then(() => { return findById(id) })
 
 }
+
 
 
 
