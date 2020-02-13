@@ -3,11 +3,11 @@ const bcrypt = require('bcryptjs');
 const Userdb = require('../users/users-model');
 const secret = require('../config/secret');
 const jwt = require('jsonwebtoken');
-const restricted = require('./auth-middleware')
-<<<<<<< HEAD
-=======
+const restricted = require('./auth-middleware');
 
->>>>>>> 4c09d238a065fb091a12bc8faa2c1c9ade430fde
+
+
+
 router.get('/', restricted, (req,res) => {
     Userdb.find()
     .then(user =>{
