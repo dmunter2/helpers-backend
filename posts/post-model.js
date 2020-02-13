@@ -54,12 +54,12 @@ function remove(postId, id) {
 
 }
 
-async function update(id, changes) {
+async function update(id, changes, userid) {
     await db('posts')
         .where({ id })
         .update(changes)
 
-    return findById(id);
+    return findById(userid);
 }
 
 

@@ -59,15 +59,16 @@ router.delete('/delete', restricted, (req,res) => {
         })
 })
 
-router.put('/change', (req, res) => {
+router.put('/change', restricted, (req, res) => {
     const id = req.body.id;
     const changes = req.body;
+    const userid = req.decodedJwt.userid
     
 
     Postdb.findById(id)
         .then(scheme => {
             if (scheme) {
-                Postdb.update(id, changes)
+                Postdb.update(id, changes, userid)
                     .then(updatedScheme => {
                         res.json(updatedScheme);
                     })
