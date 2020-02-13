@@ -59,7 +59,29 @@ router.delete('/delete', restricted, (req,res) => {
         })
 })
 
+router.put('/change', (req, res) => {
+    const id = req.body.id;
+    const changes = req.body;
+    
 
+    Postdb.findById(id)
+        .then(scheme => {
+            if (scheme) {
+                Postdb.update(id, changes)
+                    .then(updatedScheme => {
+                        res.json(updatedScheme);
+                    })
+                    .catch(err => {
+                        res.status(500).json({message: "There was an error"})
+                    })
+            } else {
+                res.status(404).json({ message: 'Could not find scheme with given id' });
+            }
+        })
+        .catch(err => {
+            res.status(500).json({ message: 'Failed to update scheme' });
+        });
+});
 
 
 module.exports = router ;

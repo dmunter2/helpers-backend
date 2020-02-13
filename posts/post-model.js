@@ -7,7 +7,8 @@ module.exports = {
     findBy,
     findById, 
     insert,
-    find
+    find,
+    update
 
 }
 
@@ -52,6 +53,19 @@ function remove(postId, id) {
         .then(() => { return findById(id) })
 
 }
+
+async function update(id, changes) {
+    await db('posts')
+        .where({ id })
+        .update(changes)
+
+    return findById(id);
+}
+
+
+
+
+
 
 
 
